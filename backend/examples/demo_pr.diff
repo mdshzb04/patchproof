@@ -1,0 +1,36 @@
+--- a/service/jobs.py
++++ b/service/jobs.py
+@@ -1,18 +1,24 @@
+ import os
+ import subprocess
++import pickle
++import requests
+ 
+ 
+ # Unchanged credential. PatchProof must not call this a new finding.
+ BACKUP_TOKEN = "sk-live-OLDTOKEN1234567890"
+ 
+ 
+ def archive(path):
+-    subprocess.run(["tar", "czf", "backup.tar.gz", path], check=True)
++    subprocess.run(f"tar czf backup.tar.gz {path}", shell=True, check=True)
+ 
+ 
+ def load_cache(blob):
+-    return {"raw": blob}
++    return pickle.loads(blob)
++
++
++def fetch_manifest(url):
++    return requests.get(url, verify=False, timeout=10)
+ 
+ 
+ def debug_eval(expr):
+     return eval(expr)
+--- a/utils/labels.py
++++ b/utils/labels.py
+@@ -1,2 +1,3 @@
+ def slug(name: str) -> str:
+-    return name
++    cleaned = name.strip().lower()
++    return "-".join(part for part in cleaned.split() if part)

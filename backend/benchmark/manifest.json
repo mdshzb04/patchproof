@@ -1,0 +1,22 @@
+[
+  {"id": "shell-bad", "file": "vulnerable/shell_bad.py", "expect": ["PP001"], "label": "vulnerable"},
+  {"id": "eval-bad", "file": "vulnerable/eval_bad.py", "expect": ["PP002"], "label": "vulnerable"},
+  {"id": "pickle-bad", "file": "vulnerable/pickle_bad.py", "expect": ["PP003"], "label": "vulnerable"},
+  {"id": "yaml-bad", "file": "vulnerable/yaml_bad.py", "expect": ["PP004"], "label": "vulnerable"},
+  {"id": "secret-bad", "file": "vulnerable/secret_bad.py", "expect": ["PP005"], "label": "vulnerable"},
+  {"id": "tls-bad", "file": "vulnerable/tls_bad.py", "expect": ["PP006"], "label": "vulnerable"},
+  {"id": "mktemp-bad", "file": "vulnerable/mktemp_bad.py", "expect": ["PP007"], "label": "vulnerable"},
+  {"id": "crypto-bad", "file": "vulnerable/crypto_bad.py", "expect": ["PP008"], "label": "vulnerable"},
+  {"id": "sql-bad", "file": "vulnerable/sql_bad.py", "expect": ["PP009"], "label": "vulnerable"},
+  {"id": "except-bad", "file": "vulnerable/except_bad.py", "expect": ["PP010"], "label": "vulnerable"},
+  {"id": "shell-safe", "file": "safe/shell_safe.py", "expect": [], "label": "safe"},
+  {"id": "eval-safe", "file": "safe/eval_safe.py", "expect": [], "label": "safe"},
+  {"id": "pickle-safe", "file": "safe/pickle_safe.py", "expect": [], "label": "safe"},
+  {"id": "yaml-safe", "file": "safe/yaml_safe.py", "expect": [], "label": "safe"},
+  {"id": "secret-safe", "file": "safe/secret_safe.py", "expect": [], "label": "safe"},
+  {"id": "tls-safe", "file": "safe/tls_safe.py", "expect": [], "label": "safe"},
+  {"id": "mktemp-safe", "file": "safe/mktemp_safe.py", "expect": [], "label": "safe"},
+  {"id": "crypto-safe", "file": "safe/crypto_safe.py", "expect": [], "label": "safe"},
+  {"id": "sql-safe", "file": "safe/sql_safe.py", "expect": [], "label": "safe"},
+  {"id": "except-safe", "file": "safe/except_safe.py", "expect": [], "label": "safe"}
+]
