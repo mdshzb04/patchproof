@@ -114,9 +114,19 @@ Left on context lines, so they are pre-existing, not new:
 
 Walkthrough: [DEMO.md](DEMO.md). Ninety-second judge script: [DEMO_SCRIPT.md](DEMO_SCRIPT.md). Uploadable files: `sample/`. Screenshots from a live run: `screenshots/`.
 
-## Setup
+## Local setup
 
-Python 3.12 and Node 24 were used. Python 3.11+ is the intended floor.
+Python 3.12 and Node 24 were used. Python 3.11+ is the intended floor. Two terminals. The key is optional.
+
+```bash
+git clone https://github.com/mdshzb04/patchproof.git
+cd patchproof
+cp .env.example backend/.env
+```
+
+`backend/.env` is gitignored. Leave `OPENAI_API_KEY` empty and the review still runs. Static findings do not change when the model is off. The API reads that file at startup and does not print the key.
+
+Terminal 1, API on port 8000:
 
 ```bash
 cd backend
@@ -124,10 +134,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 pytest
-uvicorn app.main:app --port 8000
+uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Second terminal:
+Terminal 2, web app on port 3000:
 
 ```bash
 cd frontend
@@ -135,19 +145,17 @@ npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. The API is http://127.0.0.1:8000. On startup the API writes two sample reviews into `backend/data/reviews.json` if that file is empty. The UI marks them as sample data.
+Open http://127.0.0.1:3000. The UI calls http://127.0.0.1:8000. On startup the API writes two sample reviews into `backend/data/reviews.json` if that file is empty. The UI marks them as sample data.
 
-Optional model explanations, from the repo root or the shell that starts the API:
+To turn on model explanations, put the key in `backend/.env` and restart terminal 1:
 
 ```bash
-export OPENAI_API_KEY=...
-export OPENAI_BASE_URL=https://api.openai.com/v1   # any compatible base
-export OPENAI_MODEL=gpt-4o-mini
+OPENAI_API_KEY=...
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_MODEL=gpt-4o-mini
 ```
 
-Copy `.env.example` to `backend/.env`. The API reads that file at startup and does not print the key. Leave the key unset and reviews still complete. Static findings do not change when the model is off.
-
-`make test`, `make api`, and `make web` wrap the same commands after the venv and `npm install` exist.
+After the venv and `npm install` exist, `make test`, `make api`, and `make web` start the same processes.
 
 ## API
 
